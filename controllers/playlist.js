@@ -1,4 +1,4 @@
-const { find, create, findById, play, popular } = require("../models/playlist")
+const { find, create, findById, play, popular, update } = require("../models/playlist")
 const withSuccess = require("../utils/response/withSuccess")
 
 module.exports = {
@@ -21,9 +21,21 @@ module.exports = {
         const mostPopular = popular()
 
         withSuccess(res,200,'Data ditemukan',mostPopular)
+    },
+    updateOne:(req,res)=>{
+        const {id} = req.params
+        const {value} = req.body
+
+        const doUpdate = update(id,value)
+
+        withSuccess(res,201,'Sukses merubah data',doUpdate)
+    },
+    deleteOne:(req,res)=>{
+        const {id} = req.params
+
+        const doDelete = this.deleteOne(id)
+
+        withSuccess(res,200,'Sukses menghapus data',doDelete)
     }
 }
-
-//CommonJS
-//ES6 JS
 

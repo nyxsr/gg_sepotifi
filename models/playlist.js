@@ -36,4 +36,19 @@ function popular() {
     return sorted
 }
 
-module.exports = {playlist, find, findById, popular, create, play}
+function update(id,newValue) {
+    let filtered = playlist.filter(v => v.id === parseInt(id))
+    const {title,artist,album} = newValue
+    filtered[0].title = title ? title : filtered[0].title
+    filtered[0].album = album ? album : filtered[0].album
+    filtered[0].artist = artist ? artist : filtered[0].artist
+
+    return filtered
+}
+
+function deleteOne(id) {
+    playlist = playlist.filter(v => v.id !== id)
+    return playlist
+}
+
+module.exports = {playlist, find, update, deleteOne, findById, popular, create, play}
